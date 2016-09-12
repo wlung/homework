@@ -1,0 +1,25 @@
+0.  It is an example word that is 45 letters long, the max defined length for a word.
+1.  It gets resource usage.
+2.  16
+3.  It improves performace since rusage is a large struct.
+4.  First, main opens the file. Then, it reads in each character until it reaches the 
+    end of the file. It checks that the character is either a letter or apostrophe.
+    If it is either a letter or apostrophe, it adds the character onto the end of the 
+    word it is storing and checks the length of the resulting word. If the word is
+    too long (greater than 45 letters long), the word is rejected by resetting the 
+    index to zero so that the next character starts the word. The program will also
+    reject the word if the character is a digit, resetting the index to zero so that 
+    the next character starts the word. Otherwise, if a word has been found, the
+    last character is set to '\0' to indicate the end of the string. Then, the spelling
+    of the word is checked.
+5.  fgetc reads in one character at a time instead of a string. Thus, we can check
+    the length of the word as we read in characters and reject any word that does not
+    contain only letters and apostrophes. Fscanf would pick up unwanted characters like
+    numbers and would require additional steps to check the string, ruining performance.
+6.  To prevent the checked word and loaded dictionary from being modified
+7.  Hash table stores the entries from the dictionary, with each node holding a word.
+    Each node in the hash table points to the node holding the appropriate word. A 
+    linked list links words that are stored at the same "bucket," or index, in the hash table.
+8.  0.12 total, with 0.10 load time and 0.02 check time
+9.  I fixed memory leaks, modified the hash function, and tried to reduce the number of collisions.
+10. Yes, loading time is much slower than the check, size, or unload times. 
