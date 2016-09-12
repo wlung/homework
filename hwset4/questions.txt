@@ -1,0 +1,52 @@
+0.  BMP: up to 32-bit color (4,294,967,296 colors); 
+    GIF: up to 8-bit color (256 colors); 
+    JPEG: up to 24-bit color (16,777,216 colors); 
+    PNG: up to 48-bit color (281,474,976,710,656 colors)
+1.  GIF supports animation.
+2.  Lossy compression discards some information about the file when compressing, 
+    so the decompressed image will not be an exact representation of the original. 
+    Because of the loss of information, lossy compression can compress images to 
+    be smaller but worse quality than lossless compression.  
+    Lossless compression encodes all the information about the original file, so 
+    the decompressed image will be an exact representation of the original.
+3.  JPEG is lossy-compressed.
+4.  First, the operating systems changes the first character of the filename in 
+    the directory to indicate that the file was deleted and that the directory 
+    entry can be recycled.  Then, the system moves the file's FAT clusters to 
+    the list of the hard drive's free clusters.  The data inside the file is 
+    never touched.
+5.  Physically destroy the drive on which the files are stored, 
+    overwrite by filling every addressable block on the disk with ASCII NUL bytes, 
+    or degauss the drive
+6.  stdint.h is a header file that declares integer types with specific widths 
+    and defines macros that specify the minimums and maximums of each of those
+    integer types
+7.  Different platforms can have different ranges of values representing C 
+    integer data types.  Use integer types like uint8_t, uint32_t, int32_t, and 
+    uint16_t to specify how many bits and what integer type to use on any platform.  
+    uint8_t is an integer type that has exactly 8 bits on any platform.  
+    Similarly, uint32_t is an unsigned integer that has exactly 32 bits, 
+    int32_t is an integer type with exactly 32 bits, and uint16_t is an unsigned 
+    integer with exactly 16 bits.
+8.  BYTE: 1 byte (8 bits); DWORD: 4 bytes; 
+    LONG: at least 4 bytes but is allowed to be larger; WORD: 2 bytes
+9.  The first two bytes of any BMP are ASCII BM, which indicate that it is a BMP file.
+10. bfSize is the size of the bitmap file in bytes.  biSize is the number of bytes 
+    required by the structure.
+11. If biHeight is negative, the bitmap is a top-down device-independent bitmap 
+    (DIB), and its origin is the upper-left corner.
+12. biBitCount
+13. fopen returns NULL if there is an error in opening the file.  This could 
+    happen if something else is trying to write to the file at the same time.
+14. The third argument of fread specifies the number of elements to read in. Our
+    code is reading one RGB triple with fread(&triple, sizeof(RGBTRIPLE), 1, inptr)
+    because there is one RGB triple for each pixel in the BMP.
+15. padding =  (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4
+    For bi.biWidth = 3, padding =  (4 - (3 * sizeof(RGBTRIPLE)) % 4) % 4.
+    Therefore, padding = 3, which will add 3 bytes of padding.
+16. fseek moves the file position indicator.  In our code, 
+    fseek(inptr, padding, SEEK_CUR) skips over any padding that may be present.
+17. SEEK_CUR is the current position in the file and is used by fseek in
+    our code to indicate from what position to start from when counting to skip 
+    over the number of bytes specified by the variable padding.
+18. It looks like a guy wearing a suit.  I saved it in answer.bmp.
